@@ -1,0 +1,171 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.section {
+  @include section-padding;
+  background: $color-onyx;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($color-gold, 0.25), transparent);
+  }
+}
+
+// ─── HEADER ──────────────────────────────────────────────────────────────────
+.header {
+  max-width: 1280px;
+  margin-inline: auto;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  @include label-caps;
+  color: $color-gold;
+  font-size: $size-xs;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.75rem;
+}
+
+.headline {
+  @include headline-display;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  color: $color-white;
+  margin-bottom: 1rem;
+  line-height: 1.08;
+
+  em {
+    font-style: italic;
+    color: $color-gold-light;
+  }
+}
+
+.sub {
+  font-size: $size-base;
+  color: $color-silver;
+  max-width: 480px;
+  line-height: 1.7;
+}
+
+// ─── SWIPER WRAP ─────────────────────────────────────────────────────────────
+.swiperWrap {
+  max-width: 1280px;
+  margin-inline: auto;
+  position: relative;
+}
+
+.swiper {
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+// ─── SLIDE ───────────────────────────────────────────────────────────────────
+.slide {
+  position: relative;
+  height: clamp(460px, 65vh, 680px);
+  overflow: hidden;
+}
+
+.slideImg {
+  @include cover-absolute;
+  object-fit: cover;
+  transition: transform 1.2s $ease-silk;
+  // Placeholder gradient
+  background: linear-gradient(135deg, $color-graphite, $color-smoke);
+}
+
+.swiper :global(.swiper-slide-active) .slideImg {
+  transform: scale(1.03);
+}
+
+.slideOverlay {
+  @include cover-absolute;
+  @include gradient-overlay(rgba($color-onyx, 0.82), rgba($color-onyx, 0.05));
+}
+
+.slideContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  z-index: $z-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.slideCategory {
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-gold;
+  letter-spacing: 0.22em;
+}
+
+.slideName {
+  font-family: $font-display;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: $color-white;
+  line-height: 1.1;
+}
+
+.slideDesc {
+  font-size: $size-sm;
+  color: rgba($color-white, 0.78);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.slideDetail {
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-gold-muted;
+  letter-spacing: 0.15em;
+}
+
+// ─── CUSTOM NAV ──────────────────────────────────────────────────────────────
+.navRow {
+  @include flex-center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.navBtn {
+  background: transparent;
+  border: 1px solid rgba($color-gold, 0.35);
+  color: $color-gold;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: $size-base;
+  @include flex-center;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: $color-gold;
+    border-color: $color-gold;
+    color: $color-onyx;
+  }
+}
+
+// Swiper bullet override
+.pagination {
+  :global(.swiper-pagination-bullet) {
+    background: $color-dim;
+    opacity: 1;
+    width: 6px;
+    height: 6px;
+    transition: background 0.3s ease, width 0.3s ease;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background: $color-gold;
+    width: 20px;
+    border-radius: 3px;
+  }
+}

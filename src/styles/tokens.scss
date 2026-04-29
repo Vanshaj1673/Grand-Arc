@@ -1,0 +1,43 @@
+// ─── COLOUR TOKENS ───────────────────────────────────────────────────────────
+$color-onyx:       #0a0a0b;   // deepest bg
+$color-graphite:   #111114;   // card bg
+$color-smoke:      #1c1c22;   // subtle panel
+$color-line:       #2a2a35;   // borders
+
+$color-gold:       #c9a84c;   // primary accent — champagne gold
+$color-gold-light: #e8c96a;   // hover / glow
+$color-gold-muted: #7a6430;   // secondary / dimmed
+
+$color-white:      #f5f3ef;   // warm white — NOT pure #fff
+$color-silver:     #9898aa;   // body text
+$color-dim:        #5a5a70;   // muted labels
+
+// ─── TYPOGRAPHY ──────────────────────────────────────────────────────────────
+$font-display:  'Cormorant Garamond', serif;   // editorial headlines
+$font-sans:     'Inter',               sans-serif; // UI / body
+$font-mono:     'JetBrains Mono',     monospace;  // data / labels
+
+$size-2xs: 0.625rem;  //  10px
+$size-xs:  0.75rem;   //  12px
+$size-sm:  0.875rem;  //  14px
+$size-base:1rem;      //  16px
+$size-md:  1.25rem;   //  20px
+$size-lg:  1.5rem;    //  24px
+$size-xl:  2rem;      //  32px
+$size-2xl: 3rem;      //  48px
+$size-3xl: 4rem;      //  64px
+$size-4xl: 6rem;      //  96px
+$size-5xl: 8rem;      // 128px
+
+// ─── EASING ──────────────────────────────────────────────────────────────────
+$ease-expo-out:  cubic-bezier(0.16, 1, 0.3, 1);
+$ease-circ-out:  cubic-bezier(0, 0.55, 0.45, 1);
+$ease-silk:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+// ─── Z-LAYERS ────────────────────────────────────────────────────────────────
+$z-base:     0;
+$z-content:  10;
+$z-overlay:  20;
+$z-ui:       30;
+$z-cursor:   90;
+$z-modal:    100;

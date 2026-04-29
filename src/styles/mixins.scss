@@ -1,0 +1,103 @@
+@use "tokens" as *;
+
+// ─── LAYOUT ──────────────────────────────────────────────────────────────────
+@mixin flex-center($dir: row) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin cover-absolute {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin full-viewport {
+  width: 100%;
+  min-height: 100svh;
+}
+
+// ─── SECTION RHYTHM ──────────────────────────────────────────────────────────
+@mixin section-padding {
+  padding: clamp(5rem, 12vw, 10rem) clamp(1.5rem, 6vw, 8rem);
+}
+
+@mixin section-gutter {
+  padding-inline: clamp(1.5rem, 6vw, 8rem);
+}
+
+// ─── VIDEO / IMAGE OVERLAYS ──────────────────────────────────────────────────
+@mixin gradient-overlay($from: rgba(#0a0a0b, 0.75), $to: rgba(#0a0a0b, 0.2), $dir: to top) {
+  background: linear-gradient($dir, $from, $to);
+}
+
+@mixin vignette-overlay {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba($color-onyx, 0.85) 100%);
+}
+
+// ─── TYPOGRAPHY EFFECTS ──────────────────────────────────────────────────────
+@mixin text-glow($color: $color-gold, $blur: 32px) {
+  text-shadow: 0 0 $blur $color;
+}
+
+@mixin headline-display {
+  font-family: $font-display;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+@mixin label-caps {
+  font-family: $font-sans;
+  font-size: $size-xs;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+// ─── BORDERS & GLASS ─────────────────────────────────────────────────────────
+@mixin gold-border($opacity: 0.3) {
+  border: 1px solid rgba($color-gold, $opacity);
+}
+
+@mixin glass-panel {
+  background: rgba($color-graphite, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  @include gold-border(0.15);
+}
+
+// ─── ANIMATION HELPERS ───────────────────────────────────────────────────────
+@mixin fade-up-init {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+@mixin fade-up-done {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s $ease-expo-out, transform 0.8s $ease-expo-out;
+}
+
+// ─── MEDIA QUERIES ───────────────────────────────────────────────────────────
+@mixin md {
+  @media (min-width: 768px) { @content; }
+}
+@mixin lg {
+  @media (min-width: 1024px) { @content; }
+}
+@mixin xl {
+  @media (min-width: 1280px) { @content; }
+}
+@mixin mobile-only {
+  @media (max-width: 767px) { @content; }
+}

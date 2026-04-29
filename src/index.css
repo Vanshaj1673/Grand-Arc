@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* Tailwind custom theme variables — bridging with SCSS tokens */
+@theme {
+  --color-onyx:       #0a0a0b;
+  --color-graphite:   #111114;
+  --color-smoke:      #1c1c22;
+  --color-gold:       #c9a84c;
+  --color-gold-light: #e8c96a;
+  --color-gold-muted: #7a6430;
+  --color-cream:      #f5f3ef;
+  --color-silver:     #9898aa;
+  --color-dim:        #5a5a70;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-sans:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+}

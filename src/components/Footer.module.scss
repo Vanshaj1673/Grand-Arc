@@ -1,0 +1,56 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.footer {
+  background: $color-graphite;
+  border-top: 1px solid $color-line;
+  padding: 2rem clamp(1.5rem, 6vw, 8rem);
+}
+
+.inner {
+  max-width: 1280px;
+  margin-inline: auto;
+  @include flex-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @include mobile-only {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.left {
+  @include flex-center;
+  gap: 0.5rem;
+}
+
+.mark {
+  color: $color-gold-muted;
+  font-size: 0.8rem;
+}
+
+.brand {
+  font-family: $font-display;
+  font-size: $size-sm;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: $color-dim;
+}
+
+.legal {
+  font-size: $size-2xs;
+  color: $color-dim;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.topLink {
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-dim;
+  letter-spacing: 0.15em;
+  transition: color 0.3s ease;
+
+  &:hover { color: $color-gold; }
+}

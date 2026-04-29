@@ -1,0 +1,159 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.section {
+  position: relative;
+  @include section-padding;
+  padding-block: clamp(6rem, 14vw, 12rem);
+  background: $color-onyx;
+  overflow: hidden;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($color-gold, 0.3), transparent);
+  }
+}
+
+// Ambient radial glow behind headline
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba($color-gold, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: $z-base;
+}
+
+.inner {
+  position: relative;
+  z-index: $z-content;
+  max-width: 720px;
+  margin-inline: auto;
+  @include flex-center(column);
+  gap: 0;
+}
+
+.line {
+  width: 64px;
+  height: 1px;
+  background: $color-gold;
+  margin-bottom: 2rem;
+  transform-origin: center;
+}
+
+.eyebrow {
+  @include label-caps;
+  color: $color-gold;
+  font-size: $size-xs;
+  letter-spacing: 0.25em;
+  margin-bottom: 1.5rem;
+}
+
+.headline {
+  @include headline-display;
+  font-size: clamp(2.5rem, 5.5vw, 5.5rem);
+  color: $color-white;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+
+  em {
+    font-style: italic;
+    color: $color-gold-light;
+    @include text-glow($color-gold, 48px);
+  }
+}
+
+.sub {
+  font-size: clamp($size-sm, 1.1vw, $size-base);
+  color: $color-silver;
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+
+// ─── BUTTONS ─────────────────────────────────────────────────────────────────
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.btnPrimary {
+  @include label-caps;
+  font-size: $size-xs;
+  letter-spacing: 0.15em;
+  padding: 1rem 2.5rem;
+  background: $color-gold;
+  color: $color-onyx;
+  border-radius: 2px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    background: $color-gold-light;
+    box-shadow: 0 0 48px rgba($color-gold, 0.5);
+    transform: translateY(-1px);
+  }
+}
+
+.btnSecondary {
+  @include label-caps;
+  font-size: $size-xs;
+  letter-spacing: 0.15em;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  @include gold-border(0.5);
+  color: $color-gold;
+  border-radius: 2px;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background: rgba($color-gold, 0.1);
+    border-color: $color-gold;
+  }
+}
+
+// ─── CONTACT ROW ─────────────────────────────────────────────────────────────
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contactItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.contactLabel {
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-dim;
+  letter-spacing: 0.18em;
+}
+
+.contactValue {
+  font-size: $size-sm;
+  color: $color-silver;
+}
+
+.divider {
+  width: 1px;
+  height: 36px;
+  background: $color-line;
+
+  @include mobile-only { display: none; }
+}

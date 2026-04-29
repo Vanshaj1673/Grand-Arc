@@ -1,0 +1,187 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.section {
+  @include section-padding;
+  background: $color-smoke;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba($color-gold, 0.2), transparent);
+  }
+}
+
+// ─── HEADER ──────────────────────────────────────────────────────────────────
+.header {
+  max-width: 1280px;
+  margin-inline: auto;
+  margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+  @include label-caps;
+  color: $color-gold;
+  font-size: $size-xs;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.75rem;
+}
+
+.headline {
+  @include headline-display;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  color: $color-white;
+  line-height: 1.08;
+  margin-bottom: 1rem;
+
+  em {
+    font-style: italic;
+    color: $color-gold-light;
+  }
+}
+
+.sub {
+  font-size: $size-base;
+  color: $color-silver;
+  max-width: 440px;
+  line-height: 1.7;
+}
+
+// ─── SWIPER OUTER ────────────────────────────────────────────────────────────
+.swiperOuter {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+// ─── CARD ────────────────────────────────────────────────────────────────────
+.slide {
+  height: auto;
+}
+
+.card {
+  background: $color-graphite;
+  border: 1px solid $color-line;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.4s ease;
+
+  &:hover {
+    border-color: rgba($color-gold, 0.35);
+    .img { transform: scale(1.05); }
+  }
+}
+
+.imgWrap {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.img {
+  @include cover-absolute;
+  object-fit: cover;
+  transition: transform 0.8s $ease-expo-out;
+  background: linear-gradient(135deg, $color-graphite, $color-smoke);
+}
+
+.imgOverlay {
+  @include cover-absolute;
+  @include gradient-overlay(rgba($color-onyx, 0.6), transparent);
+}
+
+.type {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-onyx;
+  background: $color-gold;
+  padding: 0.3rem 0.75rem;
+  border-radius: 1px;
+  letter-spacing: 0.15em;
+}
+
+.cardBody {
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cardName {
+  font-family: $font-display;
+  font-size: $size-xl;
+  font-weight: 400;
+  color: $color-white;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  font-size: $size-sm;
+  color: $color-silver;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.cardCapacity {
+  @include label-caps;
+  font-size: $size-xs;
+  color: $color-gold-muted;
+  letter-spacing: 0.12em;
+  border-top: 1px solid $color-line;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+// ─── NAV ─────────────────────────────────────────────────────────────────────
+.navRow {
+  @include flex-center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.navBtn {
+  background: transparent;
+  border: 1px solid rgba($color-gold, 0.35);
+  color: $color-gold;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  @include flex-center;
+  font-size: $size-base;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: $color-gold;
+    color: $color-onyx;
+  }
+}
+
+.pag {
+  :global(.swiper-pagination-bullet) {
+    background: $color-dim;
+    opacity: 1;
+    width: 6px;
+    height: 6px;
+    transition: width 0.3s ease, background 0.3s ease;
+  }
+
+  :global(.swiper-pagination-bullet-active) {
+    background: $color-gold;
+    width: 20px;
+    border-radius: 3px;
+  }
+}

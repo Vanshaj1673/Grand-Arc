@@ -1,0 +1,183 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.hero {
+  position: relative;
+  @include full-viewport;
+  min-height: 100svh;
+  overflow: hidden;
+  @include flex-center(column);
+  align-items: flex-start;
+  @include section-gutter;
+}
+
+// ─── VIDEO ───────────────────────────────────────────────────────────────────
+.videoWrap {
+  @include cover-absolute;
+  z-index: $z-base;
+}
+
+.video {
+  @include cover-absolute;
+  object-fit: cover;
+  object-position: center;
+  // CSS-generated shimmer gradient when video hasn't loaded
+  background: linear-gradient(135deg, $color-graphite, $color-smoke, $color-graphite);
+}
+
+// ─── OVERLAYS ────────────────────────────────────────────────────────────────
+.overlayGradient {
+  @include cover-absolute;
+  z-index: $z-overlay - 5;
+  background: linear-gradient(
+    to right,
+    rgba($color-onyx, 0.92) 0%,
+    rgba($color-onyx, 0.55) 55%,
+    rgba($color-onyx, 0.15) 100%
+  );
+}
+
+.overlayVignette {
+  @include cover-absolute;
+  z-index: $z-overlay - 4;
+  background: radial-gradient(
+    ellipse 80% 80% at 70% 50%,
+    transparent 0%,
+    rgba($color-onyx, 0.5) 100%
+  );
+}
+
+.overlayGrid {
+  @include cover-absolute;
+  z-index: $z-overlay - 3;
+  background-image:
+    linear-gradient(rgba($color-gold, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($color-gold, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+// ─── CONTENT ─────────────────────────────────────────────────────────────────
+.content {
+  position: relative;
+  z-index: $z-content;
+  max-width: 800px;
+  padding-top: 12rem;
+  padding-bottom: 8rem;
+}
+
+// ─── EYEBROW ─────────────────────────────────────────────────────────────────
+.eyebrow {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.eyebrowLine {
+  display: block;
+  height: 1px;
+  width: 48px;
+  background: $color-gold;
+}
+
+.eyebrowText {
+  @include label-caps;
+  color: $color-gold;
+  letter-spacing: 0.25em;
+  font-size: $size-xs;
+}
+
+// ─── HEADLINE ────────────────────────────────────────────────────────────────
+.headline {
+  @include headline-display;
+  font-size: clamp(3rem, 7vw, 7.5rem);
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+}
+
+.headlineAccent {
+  @include text-glow($color-gold, 40px);
+  color: $color-gold-light;
+  font-style: italic;
+}
+
+// ─── SUBLINE ─────────────────────────────────────────────────────────────────
+.sub {
+  font-family: $font-sans;
+  font-size: clamp($size-base, 1.2vw, $size-md);
+  font-weight: 300;
+  color: $color-silver;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-bottom: 3rem;
+}
+
+// ─── STATS ───────────────────────────────────────────────────────────────────
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.stat {
+  @include glass-panel;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+  min-width: 130px;
+  flex: 1;
+}
+
+.statValue {
+  font-family: $font-display;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 400;
+  color: $color-white;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  @include label-caps;
+  color: $color-gold-muted;
+  font-size: $size-2xs;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+// ─── SCROLL CUE ──────────────────────────────────────────────────────────────
+.scrollCue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $z-content;
+  @include flex-center(column);
+  gap: 0.5rem;
+  animation: float-y 2.4s ease-in-out infinite;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient($color-gold, transparent);
+}
+
+.scrollText {
+  @include label-caps;
+  font-size: $size-2xs;
+  color: $color-gold-muted;
+  letter-spacing: 0.25em;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}

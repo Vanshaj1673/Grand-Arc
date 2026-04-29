@@ -1,0 +1,106 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-ui;
+  @include flex-between;
+  @include section-gutter;
+  padding-block: 1.25rem;
+  transition: background 0.5s $ease-silk, backdrop-filter 0.5s $ease-silk,
+              border-bottom 0.5s $ease-silk;
+
+  &.scrolled {
+    background: rgba($color-onyx, 0.82);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba($color-gold, 0.12);
+  }
+}
+
+// ─── LOGO ────────────────────────────────────────────────────────────────────
+.logo {
+  @include flex-center;
+  gap: 0.5rem;
+  cursor: default;
+}
+
+.logoMark {
+  font-size: 1.1rem;
+  color: $color-gold;
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+.logoName {
+  font-family: $font-display;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  color: $color-white;
+}
+
+// ─── LINKS ───────────────────────────────────────────────────────────────────
+.links {
+  display: none;
+  list-style: none;
+  gap: 2rem;
+
+  @include lg {
+    @include flex-center;
+  }
+}
+
+.link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  @include label-caps;
+  color: $color-silver;
+  letter-spacing: 0.15em;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: $color-gold;
+    transition: width 0.4s $ease-expo-out;
+  }
+
+  &:hover {
+    color: $color-white;
+    &::after { width: 100%; }
+  }
+}
+
+// ─── CTA ─────────────────────────────────────────────────────────────────────
+.cta {
+  @include label-caps;
+  cursor: pointer;
+  background: transparent;
+  @include gold-border(0.6);
+  color: $color-gold;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2px;
+  letter-spacing: 0.15em;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background: $color-gold;
+    color: $color-onyx;
+    box-shadow: 0 0 28px rgba($color-gold, 0.4);
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
