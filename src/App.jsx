@@ -1,5 +1,6 @@
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar'
+import DeckNav from './components/DeckNav'
 import Hero from './sections/Hero'
 import WhySection from './sections/WhySection'
 import RetailSection from './sections/RetailSection'
@@ -16,6 +17,7 @@ function App() {
   return (
     <div className="app-container bg-onyx min-h-screen text-white font-sans selection:bg-gold/30 selection:text-white">
       <Navbar lenis={lenis} />
+      <DeckNav lenis={lenis} />
       
       <main>
         <Hero />

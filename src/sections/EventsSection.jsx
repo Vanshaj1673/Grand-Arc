@@ -1,10 +1,13 @@
 import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { useScrollReveal } from '../hooks/useGsap'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-import { useScrollReveal } from '../hooks/useGsap'
 import styles from './EventsSection.module.scss'
 
 const EVENTS = [
@@ -43,11 +46,25 @@ const EVENTS = [
 ]
 
 export default function EventsSection() {
-  const headRef = useScrollReveal({ yOffset: 50 })
+  const sectionRef = useRef(null)
+  const headRef    = useScrollReveal({ yOffset: 40 })
+
+  useGSAP(() => {
+    gsap.from('.events-swiper-container', {
+      opacity: 0,
+      y: 40,
+      duration: 1.5,
+      ease: 'expo.out',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 60%',
+      }
+    })
+  }, { scope: sectionRef })
 
   return (
-    <section id="events" className={styles.section}>
-      <div className={styles.header} ref={headRef}>
+    <section id="events" ref={sectionRef} className={styles.section}>
+      <div ref={headRef} className={`${styles.header} will-animate`}>
         <p className={styles.eyebrow}>Events & Activations</p>
         <h2 className={styles.headline}>
           The mall<br />
@@ -58,11 +75,11 @@ export default function EventsSection() {
         </p>
       </div>
 
-      <div className={styles.swiperOuter}>
+      <div className={`${styles.swiperOuter} events-swiper-container will-animate`}>
         <Swiper
           modules={[Navigation, Pagination]}
           slidesPerView={1}
-          spaceBetween={2}
+          spaceBetween={16}
           breakpoints={{
             768:  { slidesPerView: 2 },
             1280: { slidesPerView: 3 },
@@ -77,7 +94,7 @@ export default function EventsSection() {
         >
           {EVENTS.map(({ id, type, name, desc, capacity, img }) => (
             <SwiperSlide key={id} className={styles.slide}>
-              <div className={styles.card}>
+              <article className={`${styles.card} gpu-accelerate`}>
                 <div className={styles.imgWrap}>
                   <img src={img} alt={name} className={styles.img} loading="lazy" />
                   <div className={styles.imgOverlay} />
@@ -88,7 +105,7 @@ export default function EventsSection() {
                   <p className={styles.cardDesc}>{desc}</p>
                   <div className={styles.cardCapacity}>{capacity}</div>
                 </div>
-              </div>
+              </article>
             </SwiperSlide>
           ))}
         </Swiper>

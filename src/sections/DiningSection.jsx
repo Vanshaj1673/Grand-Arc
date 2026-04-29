@@ -1,11 +1,14 @@
 import { useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { useScrollReveal } from '../hooks/useGsap'
+
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
-import { useScrollReveal } from '../hooks/useGsap'
 import styles from './DiningSection.module.scss'
 
 const VENUES = [
@@ -44,11 +47,26 @@ const VENUES = [
 ]
 
 export default function DiningSection() {
-  const headRef = useScrollReveal({ yOffset: 50 })
+  const sectionRef = useRef(null)
+  const headRef    = useScrollReveal({ yOffset: 40 })
+
+  useGSAP(() => {
+    // Subtle entry for the swiper container
+    gsap.from('.dining-swiper-container', {
+      opacity: 0,
+      scale: 0.95,
+      duration: 1.5,
+      ease: 'expo.out',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 60%',
+      }
+    })
+  }, { scope: sectionRef })
 
   return (
-    <section id="dining" className={styles.section}>
-      <div className={styles.header} ref={headRef}>
+    <section id="dining" ref={sectionRef} className={styles.section}>
+      <div ref={headRef} className={`${styles.header} will-animate`}>
         <p className={styles.eyebrow}>Food & Beverage</p>
         <h2 className={styles.headline}>
           Dining as<br /><em>destination.</em>
@@ -59,7 +77,7 @@ export default function DiningSection() {
         </p>
       </div>
 
-      <div className={styles.swiperWrap}>
+      <div className={`${styles.swiperWrap} dining-swiper-container gpu-accelerate`}>
         <Swiper
           modules={[Navigation, Pagination, Autoplay, EffectFade]}
           effect="fade"
@@ -75,13 +93,15 @@ export default function DiningSection() {
         >
           {VENUES.map(({ id, category, name, desc, detail, img }) => (
             <SwiperSlide key={id} className={styles.slide}>
-              <img
-                src={img}
-                alt={name}
-                className={styles.slideImg}
-                loading="lazy"
-              />
-              <div className={styles.slideOverlay} />
+              <div className={styles.imgWrap}>
+                <img
+                  src={img}
+                  alt={name}
+                  className={styles.slideImg}
+                  loading="lazy"
+                />
+                <div className={styles.slideOverlay} />
+              </div>
               <div className={styles.slideContent}>
                 <span className={styles.slideCategory}>{category}</span>
                 <h3 className={styles.slideName}>{name}</h3>

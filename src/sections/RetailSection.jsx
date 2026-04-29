@@ -1,10 +1,8 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import { useScrollReveal } from '../hooks/useGsap'
 import styles from './RetailSection.module.scss'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const ZONES = [
   {
@@ -35,27 +33,43 @@ const ZONES = [
 
 export default function RetailSection() {
   const sectionRef = useRef(null)
+  const stripRef   = useRef(null)
+  const headRef    = useScrollReveal({ yOffset: 40 })
 
-  // Horizontal marquee for zone cards
   useGSAP(() => {
+    if (!stripRef.current) return
+
     // Pinned horizontal scroll strip
-    gsap.to('.retail-strip', {
-      x: () => -(document.querySelector('.retail-strip').scrollWidth - window.innerWidth + 120),
+    gsap.to(stripRef.current, {
+      x: () => -(stripRef.current.scrollWidth - window.innerWidth + 160),
       ease: 'none',
       scrollTrigger: {
         trigger: sectionRef.current,
         start: 'top top',
-        end: () => `+=${document.querySelector('.retail-strip').scrollWidth}`,
-        scrub: 1.2,
+        end: () => `+=${stripRef.current.scrollWidth}`,
+        scrub: 1,
         pin: true,
         anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
+    })
+
+    // Staggered reveal of info blocks inside cards
+    gsap.from('.retail-card-info', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 40%',
+      }
     })
   }, { scope: sectionRef })
 
   return (
     <section id="retail" ref={sectionRef} className={styles.section}>
-      <div className={styles.header}>
+      <div ref={headRef} className={`${styles.header} will-animate`}>
         <p className={styles.eyebrow}>Retail Zones</p>
         <h2 className={styles.headline}>
           Every brand's<br />
@@ -63,9 +77,9 @@ export default function RetailSection() {
         </h2>
       </div>
 
-      <div className={`${styles.strip} retail-strip`}>
+      <div ref={stripRef} className={`${styles.strip} retail-strip gpu-accelerate`}>
         {ZONES.map(({ id, tag, name, desc, highlight, img }) => (
-          <article key={id} className={styles.card} id={`retail-${id}`}>
+          <article key={id} className={`${styles.card} will-animate`} id={`retail-${id}`}>
             <div className={styles.imgWrap}>
               <img
                 src={img}
@@ -75,7 +89,7 @@ export default function RetailSection() {
               />
               <div className={styles.imgOverlay} />
             </div>
-            <div className={styles.info}>
+            <div className={`${styles.info} retail-card-info`}>
               <span className={styles.tag}>{tag}</span>
               <h3 className={styles.cardTitle}>{name}</h3>
               <p className={styles.cardDesc}>{desc}</p>

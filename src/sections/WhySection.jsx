@@ -1,11 +1,8 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { useScrollReveal } from '../hooks/useGsap'
 import styles from './WhySection.module.scss'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const PILLARS = [
   {
@@ -44,18 +41,15 @@ export default function WhySection() {
 
   // Stagger pillar cards on scroll
   useGSAP(() => {
-    gsap.fromTo('.pillar-card', {
+    gsap.from('.pillar-card', {
       opacity: 0,
-      y: 50,
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      stagger: 0.15,
+      y: 80,
+      duration: 1.2,
+      stagger: 0.18,
       ease: 'expo.out',
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top 70%',
+        start: 'top 65%',
         toggleActions: 'play none none none',
       },
     })
@@ -71,7 +65,7 @@ export default function WhySection() {
 
         {/* ── Main content ── */}
         <div className={styles.body}>
-          <div ref={headRef} className={styles.head}>
+          <div ref={headRef} className={`${styles.head} will-animate`}>
             <p className={styles.eyebrow}>The Investment Case</p>
             <h2 className={styles.headline}>
               Not just a mall.<br />
@@ -85,7 +79,7 @@ export default function WhySection() {
 
           <div className={styles.pillars}>
             {PILLARS.map(({ id, number, title, body, metric }) => (
-              <article key={id} className={`${styles.card} pillar-card`}>
+              <article key={id} className={`${styles.card} pillar-card will-animate`}>
                 <span className={styles.cardNumber}>{number}</span>
                 <div className={styles.cardContent}>
                   <h3 className={styles.cardTitle}>{title}</h3>

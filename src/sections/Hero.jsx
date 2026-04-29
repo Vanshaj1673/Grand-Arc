@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import styles from './Hero.module.scss'
 
 // Ambient stat strip
@@ -19,44 +20,52 @@ export default function Hero() {
   const lineRef      = useRef(null)
   const scrollCueRef = useRef(null)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
 
-      // Cinematic reveal sequence — 10-second emotional impact
-      tl.fromTo(videoRef.current,
-        { scale: 1.08 },
-        { scale: 1, duration: 2.5, ease: 'power2.out' }
-      )
-      .fromTo(lineRef.current,
-        { scaleX: 0, transformOrigin: 'left center' },
-        { scaleX: 1, duration: 0.8 },
-        '-=1.8'
-      )
-      .fromTo(headlineRef.current.children,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.1, stagger: 0.12 },
-        '-=0.6'
-      )
-      .fromTo(subRef.current,
-        { y: 24, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.9 },
-        '-=0.5'
-      )
-      .fromTo(statsRef.current.children,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 },
-        '-=0.4'
-      )
-      .fromTo(scrollCueRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.6 },
-        '-=0.2'
-      )
-    }, containerRef)
+    // Cinematic reveal sequence — 10-second emotional impact
+    tl.fromTo(videoRef.current,
+      { scale: 1.15, filter: 'blur(10px)' },
+      { scale: 1, filter: 'blur(0px)', duration: 2.8, ease: 'power2.out' }
+    )
+    .fromTo(lineRef.current,
+      { scaleX: 0, transformOrigin: 'left center' },
+      { scaleX: 1, duration: 1 },
+      '-=2.0'
+    )
+    .fromTo(headlineRef.current.children,
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.4, stagger: 0.15 },
+      '-=1.2'
+    )
+    .fromTo(subRef.current,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.1 },
+      '-=0.9'
+    )
+    .fromTo(statsRef.current.children,
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.9, stagger: 0.12 },
+      '-=0.7'
+    )
+    .fromTo(scrollCueRef.current,
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      '-=0.4'
+    )
 
-    return () => ctx.revert()
-  }, [])
+    // Subtle parallax on video background
+    gsap.to(videoRef.current, {
+      yPercent: 15,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      }
+    })
+  }, { scope: containerRef })
 
   return (
     <section id="hero" ref={containerRef} className={styles.hero}>

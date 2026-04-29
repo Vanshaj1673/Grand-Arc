@@ -65,6 +65,29 @@ a {
   outline-offset: 4px;
 }
 
+// ─── TYPOGRAPHY HELPERS ──────────────────────────────────────────────────────
+.accent-glow {
+  @include text-glow($color-gold, 32px);
+  color: $color-gold-light;
+  font-style: italic;
+}
+
+em {
+  @extend .accent-glow;
+  font-style: italic;
+}
+
+// ─── PERFORMANCE UTILITIES ───────────────────────────────────────────────────
+.will-animate {
+  will-change: transform, opacity;
+}
+
+.gpu-accelerate {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 // ─── LENIS LOCK ──────────────────────────────────────────────────────────────
 html.lenis {
   height: auto;

@@ -1,11 +1,8 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useScrollReveal } from '../hooks/useGsap'
 import styles from './EntertainmentSection.module.scss'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const EXPERIENCES = [
   { id: 'imax', icon: '◉', label: 'IMAX Multiplex',   body: '15-screen IMAX & Dolby Cinema complex — the largest in NCR.' },
@@ -21,18 +18,15 @@ export default function EntertainmentSection() {
   const headRef    = useScrollReveal({ yOffset: 60 })
 
   useGSAP(() => {
-    gsap.fromTo('.ent-item', {
+    gsap.from('.ent-item', {
       opacity: 0,
-      x: -30,
-    }, {
-      opacity: 1,
-      x: 0,
-      duration: 0.7,
-      stagger: 0.1,
+      x: -40,
+      duration: 1.2,
+      stagger: 0.12,
       ease: 'expo.out',
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top 72%',
+        start: 'top 65%',
         toggleActions: 'play none none none',
       },
     })
@@ -43,7 +37,7 @@ export default function EntertainmentSection() {
       <div className={styles.inner}>
         {/* ── Left: text ── */}
         <div className={styles.left}>
-          <div ref={headRef}>
+          <div ref={headRef} className="will-animate">
             <p className={styles.eyebrow}>Entertainment</p>
             <h2 className={styles.headline}>
               Beyond<br />
@@ -54,7 +48,7 @@ export default function EntertainmentSection() {
             </p>
           </div>
 
-          <div className={styles.bigStat}>
+          <div className={`${styles.bigStat} will-animate`}>
             <span className={styles.bigNum}>4.5h</span>
             <span className={styles.bigLabel}>avg dwell time<br />vs industry avg 1.8h</span>
           </div>
@@ -63,7 +57,7 @@ export default function EntertainmentSection() {
         {/* ── Right: experience list ── */}
         <ul className={styles.list}>
           {EXPERIENCES.map(({ id, icon, label, body }) => (
-            <li key={id} className={`${styles.item} ent-item`}>
+            <li key={id} className={`${styles.item} ent-item will-animate`}>
               <span className={styles.itemIcon}>{icon}</span>
               <div>
                 <h3 className={styles.itemLabel}>{label}</h3>

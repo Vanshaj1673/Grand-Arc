@@ -1,0 +1,77 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.deckNav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: $z-ui;
+  display: none;
+
+  @include lg {
+    display: block;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.dot {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  group: hover;
+
+  .label {
+    @include label-caps;
+    font-size: 0.7rem;
+    color: $color-gold;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.4s $ease-expo-out, transform 0.4s $ease-expo-out;
+    pointer-events: none;
+  }
+
+  .circle {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba($color-white, 0.2);
+    transition: all 0.4s $ease-expo-out;
+    border: 1px solid transparent;
+  }
+
+  &:hover {
+    .label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .circle {
+      background: $color-gold;
+      transform: scale(1.5);
+      box-shadow: 0 0 10px rgba($color-gold, 0.5);
+    }
+  }
+
+  &.active {
+    .label {
+      opacity: 0.6;
+      transform: translateX(0);
+    }
+    .circle {
+      background: transparent;
+      border-color: $color-gold;
+      transform: scale(2);
+      box-shadow: 0 0 15px rgba($color-gold, 0.3);
+    }
+  }
+}

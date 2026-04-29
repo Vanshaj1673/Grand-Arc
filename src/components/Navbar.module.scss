@@ -75,10 +75,29 @@
     transition: width 0.4s $ease-expo-out;
   }
 
-  &:hover {
+  &:hover, &.active {
     color: $color-white;
     &::after { width: 100%; }
   }
+}
+
+// ─── PROGRESS ────────────────────────────────────────────────────────────────
+.progressContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba($color-white, 0.05);
+  overflow: hidden;
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+  background: $color-gold;
+  transform-origin: left center;
+  transform: scaleX(0);
 }
 
 // ─── CTA ─────────────────────────────────────────────────────────────────────
