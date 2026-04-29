@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import Magnetic from './Magnetic'
 import styles from './Navbar.module.scss'
 
 const NAV_LINKS = [
@@ -80,12 +81,14 @@ export default function Navbar({ lenis }) {
         ))}
       </ul>
 
-      <button
-        onClick={() => scrollTo('cta')}
-        className={styles.cta}
-      >
-        Enquire
-      </button>
+      <Magnetic strength={0.25}>
+        <button
+          onClick={() => scrollTo('cta')}
+          className={styles.cta}
+        >
+          Enquire
+        </button>
+      </Magnetic>
 
       {/* Progress Indicator */}
       <div className={styles.progressContainer}>

@@ -84,6 +84,7 @@ export default function RetailSection({ onZoneClick }) {
             className={`${styles.card} will-animate`} 
             id={`retail-${zone.id}`}
             onClick={() => onZoneClick?.(zone)}
+            data-cursor="explore"
           >
             <div className={styles.imgWrap}>
               <img

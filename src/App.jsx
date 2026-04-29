@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar'
 import DeckNav from './components/DeckNav'
+import CustomCursor from './components/CustomCursor'
+import IntroLoader from './components/IntroLoader'
 import SpotlightOverlay from './components/SpotlightOverlay'
 import Hero from './sections/Hero'
 import WhySection from './sections/WhySection'
@@ -17,9 +19,12 @@ import './styles/global.scss'
 function App() {
   const lenis = useLenis()
   const [activeDetail, setActiveDetail] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   return (
     <div className="app-container bg-onyx min-h-screen text-white font-sans selection:bg-gold/30 selection:text-white">
+      {isLoading && <IntroLoader onComplete={() => setIsLoading(false)} />}
+      <CustomCursor />
       <Navbar lenis={lenis} />
       <DeckNav lenis={lenis} />
       

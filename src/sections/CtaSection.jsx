@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import Magnetic from '../components/Magnetic'
 import styles from './CtaSection.module.scss'
 
 export default function CtaSection() {
@@ -47,12 +48,16 @@ export default function CtaSection() {
         </p>
 
         <div className={`${styles.actions} cta-actions will-animate`}>
-          <a href="mailto:leasing@grandarc.com" className={styles.btnPrimary} id="cta-enquire-btn">
-            Enquire Now
-          </a>
-          <a href="/assets/grand-arc-deck.pdf" target="_blank" rel="noopener" className={styles.btnSecondary} id="cta-download-btn">
-            Download Deck ↓
-          </a>
+          <Magnetic strength={0.2}>
+            <a href="mailto:leasing@grandarc.com" className={styles.btnPrimary} id="cta-enquire-btn">
+              Enquire Now
+            </a>
+          </Magnetic>
+          <Magnetic strength={0.2}>
+            <a href="/assets/grand-arc-deck.pdf" target="_blank" rel="noopener" className={styles.btnSecondary} id="cta-download-btn">
+              Download Deck ↓
+            </a>
+          </Magnetic>
         </div>
 
         <div className={styles.contactRow}>

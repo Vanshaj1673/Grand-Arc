@@ -1,0 +1,87 @@
+@use "../styles/tokens" as *;
+@use "../styles/mixins" as *;
+
+.cursorWrapper {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000; // Above everything
+  mix-blend-mode: difference;
+  display: none;
+
+  @include lg {
+    display: block;
+  }
+}
+
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: $color-gold;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s $ease-silk, background 0.3s ease;
+  z-index: 2;
+
+  &.pointer {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+
+  &.explore, &.close {
+    opacity: 0; // Hide inner dot for special states
+  }
+}
+
+.follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba($color-gold, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s $ease-silk, height 0.4s $ease-silk, 
+              background 0.4s $ease-silk, border-color 0.4s ease;
+  @include flex-center;
+  overflow: hidden;
+
+  &.pointer {
+    width: 60px;
+    height: 60px;
+    background: rgba($color-gold, 0.1);
+    border-color: $color-gold;
+  }
+
+  &.explore {
+    width: 80px;
+    height: 80px;
+    background: $color-gold;
+    border-color: $color-gold;
+    mix-blend-mode: normal;
+  }
+
+  &.close {
+    width: 50px;
+    height: 50px;
+    background: $color-white;
+    border-color: $color-white;
+    mix-blend-mode: normal;
+  }
+}
+
+.label {
+  @include label-caps;
+  font-size: 0.65rem;
+  color: $color-onyx;
+  font-weight: 700;
+}
+
+.closeIcon {
+  font-size: 1.5rem;
+  color: $color-onyx;
+  font-weight: 300;
+}

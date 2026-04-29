@@ -43,10 +43,10 @@ export default function SpotlightOverlay({ zone, onClose }) {
 
   return (
     <div ref={overlayRef} className={styles.overlay}>
-      <div className={styles.backdrop} onClick={handleClose} />
+      <div className={styles.backdrop} onClick={handleClose} data-cursor="close" />
       
       <div ref={contentRef} className={styles.content}>
-        <button className={styles.closeBtn} onClick={handleClose}>×</button>
+        <button className={styles.closeBtn} onClick={handleClose} data-cursor="close">×</button>
         
         <div className={styles.inner}>
           <div className={styles.left}>

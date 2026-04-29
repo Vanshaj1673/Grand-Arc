@@ -96,6 +96,7 @@ export default function DiningSection({ onVenueClick }) {
               key={venue.id} 
               className={styles.slide}
               onClick={() => onVenueClick?.(venue)}
+              data-cursor="explore"
             >
               <div className={styles.imgWrap}>
                 <img

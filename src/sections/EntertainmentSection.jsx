@@ -61,6 +61,7 @@ export default function EntertainmentSection({ onExperienceClick }) {
               key={exp.id} 
               className={`${styles.item} ent-item will-animate`}
               onClick={() => onExperienceClick?.({ ...exp, name: exp.label, desc: exp.body, img: '/assets/entertainment-placeholder.jpg', tag: 'Entertainment' })}
+              data-cursor="explore"
             >
               <span className={styles.itemIcon}>{exp.icon}</span>
               <div className={styles.itemContent}>
