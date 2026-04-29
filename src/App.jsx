@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar'
 import DeckNav from './components/DeckNav'
