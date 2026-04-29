@@ -20,12 +20,12 @@ html {
 }
 
 body {
-  background-color: $color-onyx;
+  background-color: var(--ambient-color, $color-onyx);
   color: $color-white;
   font-family: $font-sans;
-  font-size: $size-base;
-  font-weight: 300;
-  line-height: 1.6;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 

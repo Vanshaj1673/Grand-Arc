@@ -71,12 +71,14 @@ export default function Navbar({ lenis }) {
       <ul className={styles.links}>
         {NAV_LINKS.map(({ id, label }) => (
           <li key={id}>
-            <button 
-              onClick={() => scrollTo(id)} 
-              className={`${styles.link} ${activeSection === id ? styles.active : ''}`}
-            >
-              {label}
-            </button>
+            <Magnetic strength={0.15}>
+              <button 
+                onClick={() => scrollTo(id)} 
+                className={`${styles.link} ${activeSection === id ? styles.active : ''}`}
+              >
+                {label}
+              </button>
+            </Magnetic>
           </li>
         ))}
       </ul>
