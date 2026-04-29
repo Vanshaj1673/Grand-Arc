@@ -69,21 +69,47 @@
   overflow: hidden;
 }
 
-.slideImg {
+.imgWrap {
   @include cover-absolute;
-  object-fit: cover;
-  transition: transform 1.2s $ease-silk;
-  // Placeholder gradient
-  background: linear-gradient(135deg, $color-graphite, $color-smoke);
+  overflow: hidden;
 }
 
-.swiper :global(.swiper-slide-active) .slideImg {
-  transform: scale(1.03);
+.slideImg {
+  @include cover-absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s $ease-silk;
 }
 
 .slideOverlay {
   @include cover-absolute;
-  @include gradient-overlay(rgba($color-onyx, 0.82), rgba($color-onyx, 0.05));
+  @include gradient-overlay(rgba($color-onyx, 0.9), rgba($color-onyx, 0.2), to top);
+  transition: opacity 0.6s ease;
+}
+
+.slide:hover {
+  .slideImg { transform: scale(1.05); }
+  .slideOverlay { opacity: 0.8; }
+  .exploreBtn { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.exploreBtn {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  @include label-caps;
+  background: rgba($color-gold, 0.9);
+  color: $color-onyx;
+  padding: 0.75rem 1.25rem;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.5s $ease-silk;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 2;
+  white-space: nowrap;
 }
 
 .slideContent {

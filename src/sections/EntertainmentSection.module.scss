@@ -106,7 +106,25 @@
   &:hover {
     .itemIcon { color: $color-gold; transform: scale(1.15); }
     .itemLabel { color: $color-gold-light; }
+    .exploreLink { opacity: 1; transform: translateX(0); }
   }
+}
+
+.itemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.exploreLink {
+  @include label-caps;
+  font-size: 0.65rem;
+  color: $color-gold;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.3s $ease-silk;
 }
 
 .itemIcon {

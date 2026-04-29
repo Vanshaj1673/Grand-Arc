@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import LazyVideo from '../components/LazyVideo'
 import styles from './Hero.module.scss'
 
 // Ambient stat strip
@@ -69,21 +70,14 @@ export default function Hero() {
 
   return (
     <section id="hero" ref={containerRef} className={styles.hero}>
-      {/* ── Background video ── */}
       <div className={styles.videoWrap}>
-        <video
-          ref={videoRef}
-          className={styles.video}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
+        <LazyVideo
+          videoRef={videoRef}
+          src="/assets/hero.mp4"
+          webm="/assets/hero.webm"
           poster="/assets/hero-poster.jpg"
-        >
-          <source src="/assets/hero.mp4" type="video/mp4" />
-          <source src="/assets/hero.webm" type="video/webm" />
-        </video>
+          className={styles.video}
+        />
       </div>
 
       {/* ── Layered overlays ── */}

@@ -13,7 +13,7 @@ const EXPERIENCES = [
   { id: 'spa',  icon: '◆', label: 'Wellness Spa',     body: 'A 12,000 sq ft urban retreat — biohacking, spa, and cryo chambers.' },
 ]
 
-export default function EntertainmentSection() {
+export default function EntertainmentSection({ onExperienceClick }) {
   const sectionRef = useRef(null)
   const headRef    = useScrollReveal({ yOffset: 60 })
 
@@ -56,12 +56,17 @@ export default function EntertainmentSection() {
 
         {/* ── Right: experience list ── */}
         <ul className={styles.list}>
-          {EXPERIENCES.map(({ id, icon, label, body }) => (
-            <li key={id} className={`${styles.item} ent-item will-animate`}>
-              <span className={styles.itemIcon}>{icon}</span>
-              <div>
-                <h3 className={styles.itemLabel}>{label}</h3>
-                <p className={styles.itemBody}>{body}</p>
+          {EXPERIENCES.map((exp) => (
+            <li 
+              key={exp.id} 
+              className={`${styles.item} ent-item will-animate`}
+              onClick={() => onExperienceClick?.({ ...exp, name: exp.label, desc: exp.body, img: '/assets/entertainment-placeholder.jpg', tag: 'Entertainment' })}
+            >
+              <span className={styles.itemIcon}>{exp.icon}</span>
+              <div className={styles.itemContent}>
+                <h3 className={styles.itemLabel}>{exp.label}</h3>
+                <p className={styles.itemBody}>{exp.body}</p>
+                <span className={styles.exploreLink}>Explore →</span>
               </div>
             </li>
           ))}

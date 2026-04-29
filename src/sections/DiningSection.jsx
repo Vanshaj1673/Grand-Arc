@@ -46,7 +46,7 @@ const VENUES = [
   },
 ]
 
-export default function DiningSection() {
+export default function DiningSection({ onVenueClick }) {
   const sectionRef = useRef(null)
   const headRef    = useScrollReveal({ yOffset: 40 })
 
@@ -91,22 +91,27 @@ export default function DiningSection() {
           loop
           className={styles.swiper}
         >
-          {VENUES.map(({ id, category, name, desc, detail, img }) => (
-            <SwiperSlide key={id} className={styles.slide}>
+          {VENUES.map((venue) => (
+            <SwiperSlide 
+              key={venue.id} 
+              className={styles.slide}
+              onClick={() => onVenueClick?.(venue)}
+            >
               <div className={styles.imgWrap}>
                 <img
-                  src={img}
-                  alt={name}
+                  src={venue.img}
+                  alt={venue.name}
                   className={styles.slideImg}
                   loading="lazy"
                 />
                 <div className={styles.slideOverlay} />
+                <div className={styles.exploreBtn}>View Destination +</div>
               </div>
               <div className={styles.slideContent}>
-                <span className={styles.slideCategory}>{category}</span>
-                <h3 className={styles.slideName}>{name}</h3>
-                <p className={styles.slideDesc}>{desc}</p>
-                <span className={styles.slideDetail}>{detail}</span>
+                <span className={styles.slideCategory}>{venue.category}</span>
+                <h3 className={styles.slideName}>{venue.name}</h3>
+                <p className={styles.slideDesc}>{venue.desc}</p>
+                <span className={styles.slideDetail}>{venue.detail}</span>
               </div>
             </SwiperSlide>
           ))}

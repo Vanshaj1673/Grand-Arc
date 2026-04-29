@@ -16,7 +16,7 @@ import './styles/global.scss'
 
 function App() {
   const lenis = useLenis()
-  const [selectedZone, setSelectedZone] = useState(null)
+  const [activeDetail, setActiveDetail] = useState(null)
 
   return (
     <div className="app-container bg-onyx min-h-screen text-white font-sans selection:bg-gold/30 selection:text-white">
@@ -27,16 +27,16 @@ function App() {
         <Hero />
         <WhySection />
         <FloorplanSection />
-        <RetailSection onZoneClick={setSelectedZone} />
-        <DiningSection />
-        <EntertainmentSection />
+        <RetailSection onZoneClick={setActiveDetail} />
+        <DiningSection onVenueClick={setActiveDetail} />
+        <EntertainmentSection onExperienceClick={setActiveDetail} />
         <EventsSection />
         <CtaSection />
       </main>
 
       <SpotlightOverlay 
-        zone={selectedZone} 
-        onClose={() => setSelectedZone(null)} 
+        zone={activeDetail} 
+        onClose={() => setActiveDetail(null)} 
       />
 
       <Footer />
