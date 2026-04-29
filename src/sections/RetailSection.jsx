@@ -31,7 +31,7 @@ const ZONES = [
   },
 ]
 
-export default function RetailSection() {
+export default function RetailSection({ onZoneClick }) {
   const sectionRef = useRef(null)
   const stripRef   = useRef(null)
   const headRef    = useScrollReveal({ yOffset: 40 })
@@ -78,22 +78,28 @@ export default function RetailSection() {
       </div>
 
       <div ref={stripRef} className={`${styles.strip} retail-strip gpu-accelerate`}>
-        {ZONES.map(({ id, tag, name, desc, highlight, img }) => (
-          <article key={id} className={`${styles.card} will-animate`} id={`retail-${id}`}>
+        {ZONES.map((zone) => (
+          <article 
+            key={zone.id} 
+            className={`${styles.card} will-animate`} 
+            id={`retail-${zone.id}`}
+            onClick={() => onZoneClick?.(zone)}
+          >
             <div className={styles.imgWrap}>
               <img
-                src={img}
-                alt={name}
+                src={zone.img}
+                alt={zone.name}
                 className={styles.img}
                 loading="lazy"
               />
               <div className={styles.imgOverlay} />
+              <div className={styles.exploreBtn}>Explore Zone +</div>
             </div>
             <div className={`${styles.info} retail-card-info`}>
-              <span className={styles.tag}>{tag}</span>
-              <h3 className={styles.cardTitle}>{name}</h3>
-              <p className={styles.cardDesc}>{desc}</p>
-              <div className={styles.highlight}>{highlight}</div>
+              <span className={styles.tag}>{zone.tag}</span>
+              <h3 className={styles.cardTitle}>{zone.name}</h3>
+              <p className={styles.cardDesc}>{zone.desc}</p>
+              <div className={styles.highlight}>{zone.highlight}</div>
             </div>
           </article>
         ))}

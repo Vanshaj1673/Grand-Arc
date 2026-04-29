@@ -6,6 +6,7 @@ import styles from './DeckNav.module.scss'
 const SECTIONS = [
   { id: 'hero',          label: 'Entry' },
   { id: 'why',           label: 'Overview' },
+  { id: 'floorplan',     label: 'Spatial' },
   { id: 'retail',        label: 'Retail' },
   { id: 'dining',        label: 'Dining' },
   { id: 'entertainment', label: 'Play' },

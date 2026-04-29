@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useLenis } from './hooks/useLenis'
 import Navbar from './components/Navbar'
 import DeckNav from './components/DeckNav'
+import SpotlightOverlay from './components/SpotlightOverlay'
 import Hero from './sections/Hero'
 import WhySection from './sections/WhySection'
+import FloorplanSection from './sections/FloorplanSection'
 import RetailSection from './sections/RetailSection'
 import DiningSection from './sections/DiningSection'
 import EntertainmentSection from './sections/EntertainmentSection'
@@ -13,6 +16,7 @@ import './styles/global.scss'
 
 function App() {
   const lenis = useLenis()
+  const [selectedZone, setSelectedZone] = useState(null)
 
   return (
     <div className="app-container bg-onyx min-h-screen text-white font-sans selection:bg-gold/30 selection:text-white">
@@ -22,12 +26,18 @@ function App() {
       <main>
         <Hero />
         <WhySection />
-        <RetailSection />
+        <FloorplanSection />
+        <RetailSection onZoneClick={setSelectedZone} />
         <DiningSection />
         <EntertainmentSection />
         <EventsSection />
         <CtaSection />
       </main>
+
+      <SpotlightOverlay 
+        zone={selectedZone} 
+        onClose={() => setSelectedZone(null)} 
+      />
 
       <Footer />
     </div>
